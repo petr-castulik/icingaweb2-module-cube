@@ -166,7 +166,7 @@ class DimensionsForm extends QuickForm
         $dimension = null;
 
         if ($dimension = $this->getSentValue('addDimension')) {
-            $url->setParam('dimensions', (new DimensionParams($url))->add($dimension)->getParams());
+            $url->setParam('dimensions', DimensionParams::fromUrl($url)->add($dimension)->getParams());
             $this->setSuccessUrl($url->without('addDimension'));
             $this->redirectOnSuccess($this->translate('New dimension has been added'));
         }
@@ -188,7 +188,7 @@ class DimensionsForm extends QuickForm
         if ($dimension) {
             $dimensions = array_merge($cube->listDimensions(), $cube->listSlices());
             if (! isset($post['removeSlice'])) {
-                $url->setParam('dimensions', (new DimensionParams())->update($dimensions)->getParams());
+                $url->setParam('dimensions', DimensionParams::update($dimensions)->getParams());
             }
             $this->redirectAndExit($url);
         }
