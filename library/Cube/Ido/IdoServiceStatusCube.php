@@ -16,8 +16,9 @@ class IdoServiceStatusCube extends IdoCube
     {
         return [
             'services_cnt'           => 'COUNT(*)',
-            'services_critical'           => 'SUM(CASE WHEN ss.current_state = 2 THEN 1 ELSE 0 END)',
-            'services_unhandled_critical' => 'SUM(CASE WHEN ss.current_state = 2'
+            'services_critical'           => 'SUM(CASE WHEN ss.has_been_checked = 1 AND ss.current_state = 2'
+                . ' THEN 1 ELSE 0 END)',
+            'services_unhandled_critical' => 'SUM(CASE WHEN ss.has_been_checked = 1 AND ss.current_state = 2'
                 . ' AND ss.problem_has_been_acknowledged = 0 AND ss.scheduled_downtime_depth = 0'
                 . ' THEN 1 ELSE 0 END)',
             'services_warning'           => 'SUM(CASE WHEN ss.current_state = 1 THEN 1 ELSE 0 END)',
