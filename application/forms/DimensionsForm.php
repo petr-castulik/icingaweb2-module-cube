@@ -3,6 +3,7 @@
 
 namespace Icinga\Module\Cube\Forms;
 
+use Icinga\Module\Cube\BaseCube;
 use Icinga\Module\Cube\Cube;
 use Icinga\Module\Cube\Web\Form\QuickForm;
 use Icinga\Module\Cube\Web\IconHelper;
@@ -10,11 +11,11 @@ use Icinga\Module\Cube\Web\IconHelper;
 class DimensionsForm extends QuickForm
 {
     /**
-     * @var Cube
+     * @var Cube|BaseCube
      */
     private $cube;
 
-    public function setCube(Cube $cube)
+    public function setCube($cube)
     {
         $this->cube = $cube;
         return $this;
